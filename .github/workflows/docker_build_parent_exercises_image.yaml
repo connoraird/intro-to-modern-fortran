@@ -5,6 +5,12 @@ name: "Build and publish parent docker image for the exercises"
 on:
   # Allow manual execution for testing, hot-fixes, etc
   workflow_dispatch:
+    inputs:
+      push_to_registry:
+        description: 'Push the image to the GitHub Container Registry'
+        required: false
+        default: true
+        type: boolean
   # Build on pushes to main if relevant files have changed
   push:
     branches:
@@ -12,6 +18,12 @@ on:
     paths:
       - '.github/workflows/docker_build_parent_exercises_image.yaml'
       - '.devcontainer/Dockerfile'
+  pull_request:
+    types:
+      - opened
+      - ready_for_review
+      - reopened
+      - synchronize
 
 env:
   REGISTRY: ghcr.io
@@ -58,7 +70,7 @@ jobs:
             latest
             type=ref,event=branch
           context: .
-          push_to_registry: true
+          push_to_registry: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.push_to_registry) }}
           registry_address: ${{ env.REGISTRY }}
           registry_username: ${{ github.actor }}
           registry_password: ${{ github.token }}
