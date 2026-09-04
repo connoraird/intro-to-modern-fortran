@@ -19,6 +19,8 @@ on:
       - '.github/workflows/docker_build_parent_exercises_image.yaml'
       - '.devcontainer/Dockerfile'
   pull_request:
+    branches:
+      - 'main'
     types:
       - opened
       - ready_for_review
