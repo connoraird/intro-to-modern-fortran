@@ -50,7 +50,7 @@ jobs:
           large-packages: false
 
       - name: Build and push to ghcr
-        uses: aleskxyz/build-push@597b92355b8063b229b03ad0c2f7c1bdeb8f9ab4
+        uses: connoraird/build-push@b3cb85599b743a5d4bfde753303ac2f717c3cb88
         with:
           dockerfile_path: ./.devcontainer/Dockerfile
           image_name: ${{ env.IMAGE_NAME }}
