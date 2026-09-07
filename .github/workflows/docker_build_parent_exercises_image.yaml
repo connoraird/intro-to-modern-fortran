@@ -64,7 +64,7 @@ jobs:
           large-packages: false
 
       - name: Build and push to ghcr
-        uses: connoraird/build-push@b3cb85599b743a5d4bfde753303ac2f717c3cb88
+        uses: connoraird/build-push@main
         with:
           dockerfile_path: ./.devcontainer/Dockerfile
           image_name: ${{ env.IMAGE_NAME }}
